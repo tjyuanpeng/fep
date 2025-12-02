@@ -71,7 +71,11 @@
 
 <script lang="ts" setup>
 import { computed, ref, watch } from 'vue'
-import { DArrowLeft, DArrowRight, MoreFilled } from '@element-plus/icons-vue'
+import {
+  DArrowLeft,
+  DArrowRight,
+  MoreFilled,
+} from '@element-plus/components/icon/assets'
 import { useLocale, useNamespace } from '@element-plus/hooks'
 import { CHANGE_EVENT } from '@element-plus/constants'
 import { paginationPagerProps } from './pager'

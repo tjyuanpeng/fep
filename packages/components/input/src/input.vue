@@ -175,7 +175,10 @@ import {
 import { useResizeObserver } from '@vueuse/core'
 import { isNil } from 'lodash-unified'
 import { ElIcon } from '@element-plus/components/icon'
-import { Hide as IconHide, View as IconView } from '@element-plus/icons-vue'
+import {
+  Hide as IconHide,
+  View as IconView,
+} from '@element-plus/components/icon/assets'
 import {
   useFormDisabled,
   useFormItem,

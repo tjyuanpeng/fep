@@ -24,7 +24,8 @@ export const useTooltipProps = buildProps({
    */
   showArrow: {
     type: Boolean,
-    default: true,
+    // @fep
+    default: false,
   },
 })
 

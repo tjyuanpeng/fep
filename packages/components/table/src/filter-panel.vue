@@ -17,6 +17,7 @@
     @hide="handleHideTooltip"
   >
     <template #content>
+      <slot name="filter-panel" :column="column" :filtered-value="filteredValue" :handle-confirm="handleConfirm" :handle-reset="handleReset">
       <div
         v-if="multiple"
         ref="rootRef"
@@ -40,17 +41,18 @@
           </el-scrollbar>
         </div>
         <div :class="ns.e('bottom')">
-          <button
-            :class="ns.is('disabled', filteredValue.length === 0)"
+          <!-- @fep el-button primary-->
+          <el-button
             :disabled="filteredValue.length === 0"
-            type="button"
+            type="primary"
             @click="handleConfirm"
           >
             {{ t('el.table.confirmFilter') }}
-          </button>
-          <button type="button" @click="handleReset">
+          </el-button>
+          <!-- @fep el-button -->
+          <el-button @click="handleReset">
             {{ t('el.table.resetFilter') }}
-          </button>
+          </el-button>
         </div>
       </div>
       <ul
@@ -85,6 +87,7 @@
           {{ filter.text }}
         </li>
       </ul>
+      </slot>
     </template>
     <template #default>
       <button
@@ -94,8 +97,18 @@
       >
         <el-icon>
           <slot name="filter-icon">
-            <arrow-up v-if="column?.filterOpened" />
-            <arrow-down v-else />
+            <el-icon
+              size="16"
+              :style="{
+                marginTop: '-2px',
+                color:
+                  column?.filteredValue && column.filteredValue.length > 0
+                    ? 'var(--el-color-primary)'
+                    : ' #b7b9c1',
+              }"
+            >
+              <table-filter />
+            </el-icon>
           </slot>
         </el-icon>
       </button>
@@ -107,7 +120,10 @@
 import { computed, defineComponent, getCurrentInstance, ref } from 'vue'
 import { ElCheckbox, ElCheckboxGroup } from '@element-plus/components/checkbox'
 import { ElIcon } from '@element-plus/components/icon'
-import { ArrowDown, ArrowUp } from '@element-plus/icons-vue'
+// @fep
+import { ElButton } from '@element-plus/components/button'
+// @fep
+import { TableFilter } from '@element-plus/components/icon/assets'
 import { EVENT_CODE } from '@element-plus/constants'
 import { useLocale, useNamespace } from '@element-plus/hooks'
 import {
@@ -133,8 +149,10 @@ export default defineComponent({
     ElScrollbar,
     ElTooltip,
     ElIcon,
-    ArrowDown,
-    ArrowUp,
+    // @fep
+    TableFilter,
+    // @fep
+    ElButton,
   },
   props: {
     placement: {

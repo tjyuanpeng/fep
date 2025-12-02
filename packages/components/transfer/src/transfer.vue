@@ -66,7 +66,7 @@ import { useLocale, useNamespace } from '@element-plus/hooks'
 import { ElButton } from '@element-plus/components/button'
 import { ElIcon } from '@element-plus/components/icon'
 import { useFormItem } from '@element-plus/components/form'
-import { ArrowLeft, ArrowRight } from '@element-plus/icons-vue'
+import { ArrowLeft, ArrowRight } from '@element-plus/components/icon/assets'
 import { transferEmits, transferProps } from './transfer'
 import {
   useCheckedChange,

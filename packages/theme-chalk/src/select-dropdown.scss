@@ -5,7 +5,8 @@
 
 @include b(select-dropdown) {
   z-index: calc(#{getCssVar('index-top')} + 1);
-  border-radius: getCssVar('border-radius-base');
+  // @fep
+  border-radius: getCssVar('border-radius-large');
   box-sizing: border-box;
 
   .#{$namespace}-scrollbar.is-empty .#{$namespace}-select-dropdown__list {
