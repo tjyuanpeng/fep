@@ -29,11 +29,13 @@
         <div v-if="showTime" :class="drpNs.e('time-header')">
           <span :class="drpNs.e('editors-wrap')">
             <span :class="drpNs.e('time-picker-wrap')">
+              <!-- @fep change size, prefix icon -->
               <el-input
-                size="small"
+                size="large"
                 :disabled="rangeState.selecting || dateRangeDisabled"
                 :placeholder="t('el.datepicker.startDate')"
                 :class="drpNs.e('editor')"
+                :prefix-icon="Calendar"
                 :model-value="minVisibleDate"
                 :validate-event="false"
                 :readonly="!editable"
@@ -45,13 +47,15 @@
               v-clickoutside="handleMinTimeClose"
               :class="drpNs.e('time-picker-wrap')"
             >
+              <!-- @fep change size, prefix icon -->
               <el-input
-                size="small"
+                size="large"
                 :class="drpNs.e('editor')"
                 :disabled="rangeState.selecting || dateRangeDisabled"
                 :placeholder="t('el.datepicker.startTime')"
                 :model-value="minVisibleTime"
                 :validate-event="false"
+                :prefix-icon="Clock"
                 :readonly="!editable"
                 @focus="minTimePickerVisible = true"
                 @input="(val) => handleTimeInput(val, 'min')"
@@ -71,14 +75,16 @@
           </span>
           <span :class="drpNs.e('editors-wrap')" class="is-right">
             <span :class="drpNs.e('time-picker-wrap')">
+              <!-- @fep change size, prefix icon -->
               <el-input
-                size="small"
+                size="large"
                 :class="drpNs.e('editor')"
                 :disabled="rangeState.selecting || dateRangeDisabled"
                 :placeholder="t('el.datepicker.endDate')"
                 :model-value="maxVisibleDate"
                 :readonly="!minDate || !editable"
                 :validate-event="false"
+                :prefix-icon="Calendar"
                 @input="(val) => handleDateInput(val, 'max')"
                 @change="(val) => handleDateChange(val, 'max')"
               />
@@ -87,14 +93,16 @@
               v-clickoutside="handleMaxTimeClose"
               :class="drpNs.e('time-picker-wrap')"
             >
+              <!-- @fep change size, prefix icon -->
               <el-input
-                size="small"
+                size="large"
                 :class="drpNs.e('editor')"
                 :disabled="rangeState.selecting || dateRangeDisabled"
                 :placeholder="t('el.datepicker.endTime')"
                 :model-value="maxVisibleTime"
                 :readonly="!minDate || !editable"
                 :validate-event="false"
+                :prefix-icon="Clock"
                 @focus="minDate && (maxTimePickerVisible = true)"
                 @input="(val) => handleTimeInput(val, 'max')"
                 @change="(val) => handleTimeChange(val, 'max')"
@@ -248,7 +256,10 @@
               v-if="unlinkPanels"
               type="button"
               :disabled="!enableYearArrow || dateRangeDisabled"
-              :class="ppNs.e('icon-btn')"
+              :class="[
+                ppNs.e('icon-btn'),
+                ppNs.is('disabled', !enableYearArrow || dateRangeDisabled),
+              ]"
               :aria-label="t(`el.datepicker.prevYear`)"
               class="d-arrow-left"
               @click="rightPrevYear"
@@ -263,7 +274,10 @@
               v-if="unlinkPanels && rightCurrentView === 'date'"
               type="button"
               :disabled="!enableMonthArrow || dateRangeDisabled"
-              :class="ppNs.e('icon-btn')"
+              :class="[
+                ppNs.e('icon-btn'),
+                ppNs.is('disabled', !enableMonthArrow || dateRangeDisabled),
+              ]"
               :aria-label="t(`el.datepicker.prevMonth`)"
               class="arrow-left"
               @click="rightPrevMonth"
@@ -375,19 +389,18 @@
       v-if="showFooter && showTime && (showConfirm || clearable)"
       :class="ppNs.e('footer')"
     >
+      <!-- @fep no text -->
       <el-button
         v-if="clearable"
-        text
-        size="small"
         :class="ppNs.e('link-btn')"
         @click="handleClear"
       >
         {{ t('el.datepicker.clear') }}
       </el-button>
+      <!-- @fep no plain, type primary -->
       <el-button
         v-if="showConfirm"
-        plain
-        size="small"
+        type="primary"
         :class="ppNs.e('link-btn')"
         :disabled="btnDisabled"
         @click="handleRangeConfirm(false)"
@@ -417,9 +430,11 @@ import ElIcon from '@element-plus/components/icon'
 import {
   ArrowLeft,
   ArrowRight,
+  Calendar,
+  Clock,
   DArrowLeft,
   DArrowRight,
-} from '@element-plus/icons-vue'
+} from '@element-plus/components/icon/assets'
 import { panelDateRangeProps } from '../props/panel-date-range'
 import { useRangePicker } from '../composables/use-range-picker'
 import {

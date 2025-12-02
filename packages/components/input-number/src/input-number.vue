@@ -93,7 +93,12 @@ import {
   isUndefined,
   throwError,
 } from '@element-plus/utils'
-import { ArrowDown, ArrowUp, Minus, Plus } from '@element-plus/icons-vue'
+import {
+  ArrowDown,
+  ArrowUp,
+  Minus,
+  Plus,
+} from '@element-plus/components/icon/assets'
 import {
   CHANGE_EVENT,
   EVENT_CODE,

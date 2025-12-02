@@ -23,7 +23,7 @@
   @include when(dark) {
     color: getCssVar('bg-color');
     background: getCssVar('text-color', 'primary');
-    border: 1px solid getCssVar('text-color', 'primary');
+    // @fep remove
 
     > #{$arrow-selector}::before {
       border: 1px solid getCssVar('text-color', 'primary');
@@ -34,7 +34,7 @@
 
   @include when(light) {
     background: getCssVar('bg-color', 'overlay');
-    border: 1px solid getCssVar('border-color', 'light');
+    // @fep remove
 
     > #{$arrow-selector}::before {
       border: 1px solid getCssVar('border-color', 'light');

@@ -131,6 +131,13 @@
         margin-left: map.get($cascader-search-input-margin-left, $size);
       }
     }
+
+    // @fep
+    @include m(large) {
+      @include e(wrapper) {
+        border-radius: getCssVar('border-radius', 'large');
+      }
+    }
   }
 
   @include when(disabled) {

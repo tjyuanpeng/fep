@@ -15,7 +15,7 @@ import {
   UPDATE_MODEL_EVENT,
 } from '@element-plus/constants'
 import { tagProps } from '@element-plus/components/tag/src/tag'
-import { CircleClose } from '@element-plus/icons-vue'
+import { CircleClose } from '@element-plus/components/icon/assets'
 
 import type { ExtractPropTypes, ExtractPublicPropTypes } from 'vue'
 

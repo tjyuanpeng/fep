@@ -108,7 +108,8 @@ export const dropdownProps = buildProps({
    */
   showArrow: {
     type: Boolean,
-    default: true,
+    // @fep
+    default: false,
   },
   /**
    * @description delay time before show a dropdown (only works when trigger is `hover`)

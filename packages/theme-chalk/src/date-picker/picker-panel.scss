@@ -5,9 +5,10 @@
 @include b(picker-panel) {
   color: getCssVar('text-color', 'regular');
   background: getCssVar('bg-color', 'overlay');
+  // @fep
   border-radius: getCssVarWithDefault(
     ('popper', 'border-radius'),
-    getCssVar('border-radius-base')
+    getCssVar('border-radius-bigger')
   );
   line-height: 30px;
 
@@ -32,8 +33,11 @@
   }
 
   @include e(footer) {
-    border-top: 1px solid getCssVar('datepicker-inner-border-color');
-    padding: 4px 12px;
+    // @fep remove
+    // @fep
+    padding: 0 15px 15px;
+    // @fep
+    border-radius: getCssVar('border-radius-bigger');
     text-align: right;
     background-color: getCssVar('bg-color', 'overlay');
     position: relative;

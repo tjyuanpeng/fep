@@ -1,0 +1,54 @@
+stages:
+  - build
+  - publish
+
+build:
+  stage: build
+  image: node:24.11.1-alpine
+  tags:
+    - EF
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "web"'
+      when: on_success
+    - when: never
+  before_script:
+    - echo "TAG_VERSION=$TAG_VERSION"
+    - pnpm config set cache ~/.cache/npm
+  script:
+    - PUPPETEER_SKIP_DOWNLOAD=true pnpm install --frozen-lockfile
+    - export GIT_HEAD=$CI_COMMIT_SHORT_SHA
+    - echo "GIT_HEAD=$GIT_HEAD"
+    - pnpm update:version
+    - |
+      curl --silent --show-error --fail -L \
+      --header "PRIVATE-TOKEN: $SNIPPET_TOKEN" \
+      --url "http://10.168.2.105:8888/api/v4/snippets/1/raw" \
+      > fep
+    - pnpm exec tsx fep
+    - pnpm build
+  artifacts:
+    paths:
+      - ./dist
+    expire_in: 1 day
+    when: on_success
+
+publish:
+  stage: publish
+  image: node:24.11.1-alpine
+  tags:
+    - EF
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "web"'
+      when: on_success
+    - when: never
+  dependencies:
+    - build
+  script:
+    - cd dist/element-plus
+    - |
+      curl --silent --show-error --fail -L \
+      --header "PRIVATE-TOKEN: $SNIPPET_TOKEN" \
+      --url "http://10.168.2.105:8888/api/v4/snippets/2/raw" | \
+      sed "s|{{NPM_AUTH_TOKEN}}|$NPM_AUTH_TOKEN|g" \
+      > .npmrc
+    - pnpm publish --no-git-checks

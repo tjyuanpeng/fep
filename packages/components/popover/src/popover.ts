@@ -116,7 +116,8 @@ export const popoverProps = buildProps({
    */
   showArrow: {
     type: Boolean,
-    default: true,
+    // @fep
+    default: false,
   },
   /**
    * @description when popover inactive and `persistent` is `false` , popover will be destroyed

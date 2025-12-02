@@ -94,7 +94,12 @@ function useEvent<T extends DefaultRow>(
         if (dragging.value) {
           const { startColumnLeft, startLeft } = dragState.value as any
           const finalLeft = Number.parseInt(resizeProxy.style.left, 10)
-          const columnWidth = finalLeft - startColumnLeft
+          // @fep
+          let columnWidth = finalLeft - startColumnLeft
+          // @fep section
+          if (columnWidth < Number(column.minWidth)) {
+            columnWidth = Number(column.minWidth)
+          }
           column.width = column.realWidth = columnWidth
           table?.emit(
             'header-dragend',

@@ -7,7 +7,7 @@ import {
 } from '@element-plus/hooks'
 import { buildProps, definePropType, iconPropType } from '@element-plus/utils'
 import { useTooltipContentProps } from '@element-plus/components/tooltip'
-import { ArrowDown, CircleClose } from '@element-plus/icons-vue'
+import { ArrowDown, CircleClose } from '@element-plus/components/icon/assets'
 import { tagProps } from '@element-plus/components/tag'
 import { CHANGE_EVENT, UPDATE_MODEL_EVENT } from '@element-plus/constants'
 import { defaultProps } from '@element-plus/components/select-v2/src/useProps'
@@ -253,7 +253,8 @@ export const selectProps = buildProps({
    */
   showArrow: {
     type: Boolean,
-    default: true,
+    // @fep
+    default: false,
   },
   /**
    * @description offset of the dropdown

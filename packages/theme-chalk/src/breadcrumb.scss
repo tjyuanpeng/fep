@@ -27,14 +27,16 @@
     align-items: center;
 
     @include e(inner) {
-      color: getCssVar('text-color', 'regular');
+      // @fep
+      color: getCssVar('text-color', 'placeholder');
 
       &.is-link,
       & a {
-        font-weight: bold;
+        // @fep remove
         text-decoration: none;
         transition: getCssVar('transition', 'color');
-        color: getCssVar('text-color', 'primary');
+        // @fep
+        color: getCssVar('text-color', 'secondary');
 
         &:hover {
           color: getCssVar('color-primary');
@@ -49,7 +51,8 @@
         &,
         &:hover {
           font-weight: normal;
-          color: getCssVar('text-color', 'regular');
+          // @fep
+          color: getCssVar('text-color', 'placeholder');
           cursor: text;
         }
       }

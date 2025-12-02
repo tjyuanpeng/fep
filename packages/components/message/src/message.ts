@@ -59,7 +59,8 @@ export const messageDefaults = mutable({
   onClose: undefined,
   showClose: false,
   type: 'info',
-  plain: false,
+  // @fep
+  plain: true,
   offset: 16,
   placement: undefined,
   zIndex: 0,

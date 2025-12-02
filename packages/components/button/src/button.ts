@@ -1,6 +1,6 @@
 import { useSizeProp } from '@element-plus/hooks'
 import { buildProps, definePropType, iconPropType } from '@element-plus/utils'
-import { Loading } from '@element-plus/icons-vue'
+import { Loading } from '@element-plus/components/icon/assets'
 
 import type { Component, ExtractPropTypes, ExtractPublicPropTypes } from 'vue'
 

@@ -65,7 +65,11 @@ import ElCheckbox from '@element-plus/components/checkbox'
 import ElRadio from '@element-plus/components/radio'
 import ElIcon from '@element-plus/components/icon'
 import { useNamespace } from '@element-plus/hooks'
-import { ArrowRight, Check, Loading } from '@element-plus/icons-vue'
+import {
+  ArrowRight,
+  Check,
+  Loading,
+} from '@element-plus/components/icon/assets'
 import NodeContent from './node-content'
 import { CASCADER_PANEL_INJECTION_KEY } from './types'
 
