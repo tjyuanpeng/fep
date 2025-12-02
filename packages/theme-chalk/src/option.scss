@@ -28,16 +28,32 @@ $checked-icon: "data:image/svg+xml;utf8,%3Csvg class='icon' width='200' height='
   @include e(item) {
     font-size: map.get($select, 'font-size');
     // 20 as the padding of option item, 12 as the size of ✓ icon size
-    padding: 0 #{20 + 12}px 0 20px;
+    // @fep
+    padding: 0 #{14 + 12}px 0 14px;
+    // @fep
+    border-radius: getCssVar('border-radius-large');
+    // @fep
+    margin: 3px 0;
     position: relative;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     color: map.get($select-option, 'text-color');
-    height: map.get($select-option, 'height');
+    // @fep
+    min-height: map.get($select-option, 'height');
     line-height: map.get($select-option, 'height');
     box-sizing: border-box;
     cursor: pointer;
+
+    // @fep section
+    &:first-child {
+      margin-top: 0;
+    }
+
+    // @fep section
+    &:last-child {
+      margin-bottom: 0;
+    }
 
     @include when(hovering) {
       background-color: map.get($select-option, 'hover-background');
@@ -46,6 +62,8 @@ $checked-icon: "data:image/svg+xml;utf8,%3Csvg class='icon' width='200' height='
     @include when(selected) {
       color: map.get($select-option, 'selected-text-color');
       font-weight: bold;
+      // @fep
+      background-color: #1677ff0d;
     }
 
     @include when(disabled) {
@@ -66,6 +84,27 @@ $checked-icon: "data:image/svg+xml;utf8,%3Csvg class='icon' width='200' height='
       &::after {
         background-color: map.get($select-option, 'disabled-color');
       }
+    }
+  }
+
+  .#{$namespace}-select-dropdown__checkbox {
+    display: none;
+  }
+
+  @include when(lazy) {
+    .#{$namespace}-select-dropdown__item {
+      padding-right: 14px;
+    }
+    .#{$namespace}-select-dropdown__item.is-selected {
+      &::after {
+        display: none;
+      }
+    }
+    .#{$namespace}-select-dropdown__checkbox {
+      display: inline-block;
+      margin-top: -6px;
+      margin-right: 6px;
+      vertical-align: middle;
     }
   }
 }

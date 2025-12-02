@@ -13,8 +13,7 @@
 }
 
 @include b(table-filter) {
-  border: solid 1px getCssVar('border-color-lighter');
-  border-radius: 2px;
+  // @fep remove
   background-color: $color-white;
   box-shadow: map.get($dropdown, 'menu-box-shadow');
   box-sizing: border-box;
@@ -52,28 +51,21 @@
   }
 
   @include e(content) {
-    min-width: 100px;
+    // @fep
+    min-width: 180px;
   }
 
   @include e(bottom) {
-    border-top: 1px solid getCssVar('border-color-lighter');
-    padding: 8px;
+    // @fep remove section
 
-    button {
-      @include reset-button();
-
-      color: getCssVar('text-color', 'regular');
-      font-size: getCssVar('font-size-small');
-      padding: 0 3px;
-
-      &:hover {
-        color: getCssVar('color-primary');
-      }
-
-      &.is-disabled {
-        color: getCssVar('disabled-text-color');
-        cursor: not-allowed;
-      }
+    // @fep section
+    display: flex;
+    padding: 6px 6px 15px;
+    justify-content: flex-end;
+    gap: 6px;
+    > button:last-child {
+      margin-left: 0;
+      order: -1;
     }
   }
 
@@ -91,6 +83,16 @@
       margin-bottom: 12px;
       margin-left: 5px;
       height: unset;
+
+      // @fep section
+      margin: 0;
+      padding: 3px 12px;
+      height: 30px;
+      line-height: 30px;
+      border-radius: getCssVar('border-radius', 'large');
+      &:hover {
+        background-color: #1677ff0d;
+      }
     }
 
     .#{$namespace}-checkbox:last-child {

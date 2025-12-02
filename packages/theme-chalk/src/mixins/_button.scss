@@ -10,9 +10,8 @@
         $type,
       ),
       'bg-color': (
-        'color',
-        $type,
-        'light-9',
+        // @fep
+        'bg-color',
       ),
       'border-color': (
         'color',
@@ -53,9 +52,10 @@
     &:hover,
     &:focus,
     &:active {
-      color: getCssVar('color', $type, 'light-5');
-      background-color: getCssVar('color', $type, 'light-9');
-      border-color: getCssVar('color', $type, 'light-8');
+      // @fep remove
+      // @fep
+      background-color: getCssVar('fill-color', 'blank');
+      // @fep remove
     }
   }
 }
@@ -190,22 +190,7 @@
         'dark-2',
       ),
     ),
-    'disabled': (
-      'text-color': (
-        'color',
-        'white',
-      ),
-      'bg-color': (
-        'color',
-        $type,
-        'light-5',
-      ),
-      'border-color': (
-        'color',
-        $type,
-        'light-5',
-      ),
-    ),
+    // @fep remove
   );
 
   @each $type, $typeMap in $button-color-types {

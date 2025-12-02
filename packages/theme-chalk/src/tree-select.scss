@@ -36,6 +36,8 @@
       // https://github.com/yujinpan/el-select-tree/pull/33
       height: 20px;
       line-height: 20px;
+      // @fep
+      min-height: unset;
     }
   }
 }

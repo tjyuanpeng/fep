@@ -188,20 +188,28 @@ $checkbox-bordered-input-width: map.merge(
       }
     }
     @include when(indeterminate) {
-      .#{$namespace}-checkbox__inner {
-        background-color: getCssVar('checkbox-checked-bg-color');
-        border-color: getCssVar('checkbox-checked-input-border-color');
+      // @fep
+      &:not(.is-checked) .#{$namespace}-checkbox__inner {
+        // @fep remove
 
         &::before {
           content: '';
           position: absolute;
           display: block;
-          background-color: getCssVar('checkbox-checked-icon-color');
-          height: 2px;
-          transform: scale(0.5);
+          // @fep
+          background-color: getCssVar('checkbox-checked-bg-color');
+          // @fep
+          width: 100%;
+          // @fep
+          height: 100%;
+          // @fep
+          border-radius: var(--el-checkbox-border-radius);
+          // @fep
+          transform: scale(0.58);
           left: 0;
           right: 0;
-          top: 5px;
+          // @fep
+          top: 0;
         }
 
         &::after {
@@ -232,10 +240,12 @@ $checkbox-bordered-input-width: map.merge(
     &::after {
       box-sizing: content-box;
       content: '';
-      border: 1px solid transparent;
+      // @fep
+      border: 1.5px solid transparent;
       border-left: 0;
       border-top: 0;
-      height: 7px;
+      // @fep
+      height: 6px;
       left: 50%;
       position: absolute;
       top: 50%;
@@ -277,15 +287,7 @@ $checkbox-bordered-input-width: map.merge(
   }
 
   &.#{$namespace}-checkbox--small {
-    @include e(input) {
-      @include when(indeterminate) {
-        @include e(inner) {
-          &::before {
-            top: 4px;
-          }
-        }
-      }
-    }
+    // @fep remove
     @include e(inner) {
       &::after {
         width: 2px;

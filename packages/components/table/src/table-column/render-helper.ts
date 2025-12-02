@@ -144,6 +144,15 @@ function useRender<T extends DefaultRow>(
       }
     }
 
+    // @fep
+    if (slots['filter-panel']) {
+      column.renderFilterPanel = (scope) => {
+        return renderSlot(slots, 'filter-panel', scope)
+      }
+    }
+    // @fep
+    column.editable = !!slots['edit']
+
     if (slots.expand) {
       column.renderExpand = (scope) => {
         return renderSlot(slots, 'expand', scope)
@@ -170,7 +179,15 @@ function useRender<T extends DefaultRow>(
       // 对 renderCell 进行包装
       column.renderCell = (data) => {
         let children: VNode | VNode[] | null = null
-        if (slots.default) {
+        // @fep
+        const isEditing =
+          slots.edit &&
+          data.$index === data.store.states.edit.rowIndex &&
+          data.column.getColumnIndex() === data.store.states.edit.columnIndex
+        // @fep section
+        if (isEditing) {
+          children = renderSlot(slots, 'edit', data)
+        } else if (slots.default) {
           const vnodes = slots.default(data)
           children = vnodes.some((v) => v.type !== Comment)
             ? vnodes
@@ -187,7 +204,8 @@ function useRender<T extends DefaultRow>(
           hasTreeColumn.value && data.cellIndex === firstUserColumnIndex
         const prefix = treeCellPrefix(data, shouldCreatePlaceholder)
         const props = {
-          class: 'cell',
+          // @fep
+          class: isEditing ? 'cell cell-editing' : 'cell',
           style: {},
         }
         if (column.showOverflowTooltip) {

@@ -27,7 +27,7 @@
       </div>
       <div :class="ppNs.e('body')">
         <div v-if="showTime" :class="dpNs.e('time-header')">
-          <span :class="dpNs.e('editor-wrap')">
+          <span :class="dpNs.e('editor-wrap')" style="display: none">
             <el-input
               :placeholder="t('el.datepicker.selectDate')"
               :model-value="visibleDate"
@@ -43,13 +43,15 @@
             v-click-outside="handleTimePickClose"
             :class="dpNs.e('editor-wrap')"
           >
+            <!-- @fep change size, prefix icon -->
             <el-input
               :placeholder="t('el.datepicker.selectTime')"
               :model-value="visibleTime"
-              size="small"
+              size="large"
               :validate-event="false"
               :disabled="dateDisabled"
               :readonly="!editable"
+              :prefix-icon="Clock"
               @focus="onTimePickerInputFocus"
               @input="(val) => (userInputTime = val)"
               @change="handleVisibleTimeChange"
@@ -191,20 +193,19 @@
       v-if="showFooter && footerVisible && footerFilled"
       :class="ppNs.e('footer')"
     >
+      <!-- @fep no text -->
       <el-button
         v-show="!isMultipleType && showNow"
-        text
-        size="small"
         :class="ppNs.e('link-btn')"
         :disabled="disabledNow"
         @click="changeToNow"
       >
         {{ t('el.datepicker.now') }}
       </el-button>
+      <!-- @fep no plain, type primary -->
       <el-button
         v-if="showConfirm"
-        plain
-        size="small"
+        type="primary"
         :class="ppNs.e('link-btn')"
         :disabled="disabledConfirm"
         @click="onConfirm"
@@ -250,9 +251,10 @@ import { EVENT_CODE } from '@element-plus/constants'
 import {
   ArrowLeft,
   ArrowRight,
+  Clock,
   DArrowLeft,
   DArrowRight,
-} from '@element-plus/icons-vue'
+} from '@element-plus/components/icon/assets'
 import { panelDatePickProps } from '../props/panel-date-pick'
 import {
   correctlyParseUserInput,

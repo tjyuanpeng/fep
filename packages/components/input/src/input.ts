@@ -8,7 +8,7 @@ import {
 } from '@element-plus/utils'
 import { UPDATE_MODEL_EVENT } from '@element-plus/constants'
 import { useAriaProps, useSizeProp } from '@element-plus/hooks'
-import { CircleClose } from '@element-plus/icons-vue'
+import { CircleClose } from '@element-plus/components/icon/assets'
 
 import type { ExtractPublicPropTypes, HTMLAttributes, StyleValue } from 'vue'
 import type { ComponentSize } from '@element-plus/constants'
