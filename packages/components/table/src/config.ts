@@ -1,7 +1,7 @@
 import { h } from 'vue'
 import ElCheckbox from '@element-plus/components/checkbox'
 import { ElIcon } from '@element-plus/components/icon'
-import { ArrowRight, Loading } from '@element-plus/icons-vue'
+import { ArrowRight, Loading } from '@element-plus/components/icon/assets'
 import { getProp, isBoolean, isFunction, isNumber } from '@element-plus/utils'
 
 import type { VNode } from 'vue'

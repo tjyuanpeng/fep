@@ -22,7 +22,8 @@ function useEvents<T extends DefaultRow>(props: Partial<TableBodyProps<T>>) {
   const parent = inject(TABLE_INJECTION_KEY)
   const tooltipContent = ref('')
   const tooltipTrigger = ref(h('div'))
-  const handleEvent = (event: Event, row: T, name: string) => {
+  // @fep
+  const handleEvent = (event: Event, row: T, name: string, $index?: number) => {
     const table = parent
     const cell = getCell(event)
     let column: TableColumnCtx<T> | null = null
@@ -38,15 +39,28 @@ function useEvents<T extends DefaultRow>(props: Partial<TableBodyProps<T>>) {
       if (column) {
         table?.emit(`cell-${name}`, row, column, cell, event)
       }
+      // @fep section
+      if (
+        column &&
+        column.editable &&
+        table?.props.editTrigger === name &&
+        $index !== undefined
+      ) {
+        props.store?.setEdit(row, column, cell, $index, column.getColumnIndex())
+      }
     }
     table?.emit(`row-${name}`, row, column, event)
   }
-  const handleDoubleClick = (event: Event, row: T) => {
-    handleEvent(event, row, 'dblclick')
+  // @fep
+  const handleDoubleClick = (event: Event, row: T, $index?: number) => {
+    // @fep
+    handleEvent(event, row, 'dblclick', $index)
   }
-  const handleClick = (event: Event, row: T) => {
+  // @fep
+  const handleClick = (event: Event, row: T, $index?: number) => {
     props.store?.commit('setCurrentRow', row)
-    handleEvent(event, row, 'click')
+    // @fep
+    handleEvent(event, row, 'click', $index)
   }
   const handleContextMenu = (event: Event, row: T) => {
     handleEvent(event, row, 'contextmenu')

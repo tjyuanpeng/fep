@@ -438,6 +438,13 @@
       }
     }
   }
+
+  // @fep
+  @include m(large) {
+    @include e(wrapper) {
+      border-radius: getCssVar('border-radius', 'large');
+    }
+  }
 }
 
 @include b(input-group) {

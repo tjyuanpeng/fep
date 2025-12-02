@@ -27,7 +27,11 @@ import {
 } from '@element-plus/utils'
 import { EVENT_CODE } from '@element-plus/constants'
 import { ElIcon } from '@element-plus/components/icon'
-import { ArrowLeft, ArrowRight, Close } from '@element-plus/icons-vue'
+import {
+  ArrowLeft,
+  ArrowRight,
+  Close,
+} from '@element-plus/components/icon/assets'
 import { useNamespace } from '@element-plus/hooks'
 import useWheel from '@element-plus/components/virtual-list/src/hooks/use-wheel'
 import { clamp } from 'lodash-unified'

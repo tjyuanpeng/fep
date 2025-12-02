@@ -6,7 +6,7 @@ import {
   useSizeProp,
 } from '@element-plus/hooks'
 import { useTooltipContentProps } from '@element-plus/components/tooltip'
-import { CircleClose } from '@element-plus/icons-vue'
+import { CircleClose } from '@element-plus/components/icon/assets'
 import { disabledTimeListsProps } from '../props/shared'
 
 import type { Component, ExtractPropTypes, ExtractPublicPropTypes } from 'vue'
@@ -227,7 +227,11 @@ export const timePickerDefaultProps = buildProps({
   /**
    * @description unlink two date-panels in range-picker
    */
-  unlinkPanels: Boolean,
+  // @fep default true
+  unlinkPanels: {
+    type: Boolean,
+    default: true,
+  },
   /**
    * @description position of dropdown
    */

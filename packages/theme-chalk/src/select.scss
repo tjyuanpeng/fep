@@ -162,6 +162,17 @@
     }
   }
 
+  @include e(count-tag-popper) {
+    padding: 4px;
+    border-radius: 6px;
+
+    .#{$namespace}-select__selection {
+      flex-direction: column;
+      align-items: start;
+      width: fit-content;
+    }
+  }
+
   @include e(selected-item) {
     display: flex;
     flex-wrap: wrap;
@@ -264,6 +275,13 @@
       @include e(input) {
         height: map.get($select-item-height, $size);
       }
+    }
+  }
+
+  // @fep
+  @include m(large) {
+    @include e(wrapper) {
+      border-radius: getCssVar('border-radius', 'large');
     }
   }
 }

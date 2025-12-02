@@ -144,7 +144,7 @@ import {
   ScaleToOriginal,
   ZoomIn,
   ZoomOut,
-} from '@element-plus/icons-vue'
+} from '@element-plus/components/icon/assets'
 import { imageViewerEmits } from './image-viewer'
 
 import type { CSSProperties } from 'vue'

@@ -85,8 +85,9 @@ function useRender<T extends DefaultRow>(props: Partial<TableBodyProps<T>>) {
         style: [displayStyle, getRowStyle(row, $index)],
         class: rowClasses,
         key: getKeyOfRow(row, $index),
-        onDblclick: ($event: Event) => handleDoubleClick($event, row),
-        onClick: ($event: Event) => handleClick($event, row),
+        // @fep
+        onDblclick: ($event: Event) => handleDoubleClick($event, row, $index),
+        onClick: ($event: Event) => handleClick($event, row, $index),
         onContextmenu: ($event: Event) => handleContextMenu($event, row),
         onMouseenter: () => handleMouseEnter($index),
         onMouseleave: handleMouseLeave,

@@ -102,9 +102,20 @@ export function useResizable(
 
   return {
     size: computed(() => {
-      return hasStartedDragging.value
-        ? `${getSize.value}px`
-        : addUnit(props.size)
+      // @fep
+      let size = props.size
+      switch (props.size) {
+        case 'small':
+          size = 335
+          break
+        case 'regular':
+          size = 420
+          break
+        case 'large':
+          size = 950
+          break
+      }
+      return hasStartedDragging.value ? `${getSize.value}px` : addUnit(size)
     }),
     isResizing,
     isHorizontal,
