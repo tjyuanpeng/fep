@@ -52,7 +52,7 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
 import ElIcon from '@element-plus/components/icon'
-import { Close } from '@element-plus/icons-vue'
+import { Close } from '@element-plus/components/icon/assets'
 import { useLocale, useNamespace } from '@element-plus/hooks'
 import { useFormSize } from '@element-plus/components/form'
 import { tagEmits } from './tag'

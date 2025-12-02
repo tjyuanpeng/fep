@@ -96,18 +96,20 @@ $button-icon-span-gap: map.merge(
   }
 
   @include when(plain) {
-    @include css-var-from-global(
-      ('button', 'hover', 'text-color'),
-      ('color', 'primary')
-    );
+    // @fep remove
     @include css-var-from-global(
       ('button', 'hover', 'bg-color'),
       ('fill-color', 'blank')
     );
-    @include css-var-from-global(
-      ('button', 'hover', 'border-color'),
-      ('color', 'primary')
-    );
+    // @fep remove
+
+    // @fep
+    &.is-disabled {
+      &,
+      &:hover {
+        background-color: getCssVar('fill-color', 'blank');
+      }
+    }
   }
 
   @include when(active) {

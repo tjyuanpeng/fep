@@ -1,4 +1,4 @@
-import { Close } from '@element-plus/icons-vue'
+import { Close } from '@element-plus/components/icon/assets'
 import { buildProps, definePropType, iconPropType } from '@element-plus/utils'
 
 import type { AppContext, Component, ExtractPublicPropTypes, VNode } from 'vue'

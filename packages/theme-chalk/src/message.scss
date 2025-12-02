@@ -10,7 +10,8 @@
   width: fit-content;
   max-width: calc(100% - 32px);
   box-sizing: border-box;
-  border-radius: getCssVar('border-radius-base');
+  // @fep
+  border-radius: getCssVar('border-radius-large');
   border-width: getCssVar('border-width');
   border-style: getCssVar('border-style');
   border-color: getCssVar('message', 'border-color');
@@ -63,7 +64,8 @@
       @include css-var-from-global(('message', 'text-color'), ('color', $type));
 
       .#{$namespace}-message__content {
-        color: getCssVar('message', 'text-color');
+        // @fep
+        color: getCssVar('text-color', 'primary');
         overflow-wrap: break-word;
       }
     }

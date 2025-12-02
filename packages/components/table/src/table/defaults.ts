@@ -104,7 +104,24 @@ type CellStyle<T extends DefaultRow> =
       columnIndex: number
     }) => CSSProperties)
 type Layout = 'fixed' | 'auto'
+
+// @fep section
+type EditScope<T extends DefaultRow> = {
+  row: T
+  column: TableColumnCtx<T>
+  cell: Element
+  rowIndex: number
+  columnIndex: number
+}
+
 interface TableProps<T extends DefaultRow> {
+  // @fep start
+  editTrigger?: 'click' | 'dblclick'
+  beforeEnterEdit?: (scope: EditScope<T>) => boolean
+  afterEnterEdit?: (scope: EditScope<T>) => void
+  beforeExitEdit?: (scope: EditScope<T>) => boolean
+  afterExitEdit?: (scope: EditScope<T>) => void
+  // @fep end
   data: T[]
   size?: ComponentSize
   width?: string | number
@@ -204,6 +221,17 @@ interface RenderRowData<T extends DefaultRow> {
 }
 
 export default {
+  // @fep start
+  editTrigger: {
+    type: String as PropType<TableProps<any>['editTrigger']>,
+    default: 'dblclick',
+  },
+  beforeEnterEdit: Function as PropType<TableProps<any>['beforeEnterEdit']>,
+  afterEnterEdit: Function as PropType<TableProps<any>['afterEnterEdit']>,
+  beforeExitEdit: Function as PropType<TableProps<any>['beforeExitEdit']>,
+  afterExitEdit: Function as PropType<TableProps<any>['afterExitEdit']>,
+  // @fep end
+
   /**
    * @description table data
    */

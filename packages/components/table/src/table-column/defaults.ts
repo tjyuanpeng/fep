@@ -79,6 +79,10 @@ type TableColumnCtx<T extends DefaultRow = DefaultRow> = {
   no: number
   filterOpened?: boolean
   renderFilterIcon?: (scope: any) => VNode
+  // @fep start
+  renderFilterPanel?: (scope: any) => VNode
+  editable?: boolean
+  // @fep end
   renderExpand?: (scope: any) => VNode
 }
 
