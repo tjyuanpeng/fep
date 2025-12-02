@@ -14,9 +14,13 @@
     font-size: 0;
     position: relative;
     overflow: hidden;
+    // @fep
+    padding: 6px 0;
 
     &::after,
     &::before {
+      // @fep
+      display: none;
       content: '';
       top: 50%;
       position: absolute;
@@ -62,10 +66,12 @@
         #{getCssVar('border-color-light')}
       );
     padding: 4px;
-    height: 36px;
+    // @fep remove
     line-height: 25px;
     text-align: right;
     box-sizing: border-box;
+    // @fep
+    padding: 9px;
   }
 
   @include e(btn) {

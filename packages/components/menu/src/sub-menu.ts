@@ -28,7 +28,7 @@ import {
   throwError,
 } from '@element-plus/utils'
 import { useNamespace } from '@element-plus/hooks'
-import { ArrowDown, ArrowRight } from '@element-plus/icons-vue'
+import { ArrowDown, ArrowRight } from '@element-plus/components/icon/assets'
 import { ElIcon } from '@element-plus/components/icon'
 import useMenu from './use-menu'
 import { useMenuCssVar } from './use-menu-css-var'

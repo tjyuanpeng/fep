@@ -108,7 +108,8 @@ export const dropdownProps = buildProps({
    */
   showArrow: {
     type: Boolean,
-    default: true,
+    // @fep
+    default: false,
   },
   /**
    * @description delay time before show a dropdown (only works when trigger is `hover`)
@@ -161,6 +162,12 @@ export const dropdownProps = buildProps({
   buttonProps: {
     type: definePropType<Partial<ButtonProps>>(Object),
   },
+
+  // @fep
+  referenceElementProps: {
+    type: definePropType<Partial<ButtonProps>>(Object),
+  },
+
   /**
    * @description whether the dropdown popup is teleported to the body
    */

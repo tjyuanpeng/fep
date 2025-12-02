@@ -21,14 +21,24 @@
   table {
     table-layout: fixed;
     width: 100%;
+    // @fep
+    border-collapse: separate;
   }
 
   .#{$namespace}-picker-panel__body {
     min-width: 513px;
+    // @fep
+    display: grid;
+    // @fep
+    grid-template-rows: auto auto;
+    // @fep
+    grid-template-columns: 1fr 1fr;
   }
 
   .#{$namespace}-picker-panel__content {
     margin: 0;
+    // @fep
+    width: auto;
   }
 
   @include e(header) {
@@ -81,7 +91,8 @@
     padding: 16px;
 
     @include when(left) {
-      border-right: 1px solid getCssVar('datepicker-inner-border-color');
+      // @fep remove
+      // border-right: 1px solid getCssVar('datepicker-inner-border-color');
     }
     .#{$namespace}-date-range-picker__header {
       div {
@@ -102,12 +113,23 @@
 
   @include e(time-header) {
     position: relative;
-    border-bottom: 1px solid getCssVar('datepicker-inner-border-color');
+    // @fep
+    border-top: 1px solid getCssVar('datepicker-inner-border-color');
     font-size: 12px;
-    padding: 8px 5px 5px 5px;
+    // @fep
+    padding: 15px 10px;
     display: table;
     width: 100%;
     box-sizing: border-box;
+    // @fep
+    grid-column: span 2;
+    // @fep
+    order: 1;
+
+    // @fep
+    > span .#{$namespace}-icon {
+      vertical-align: middle;
+    }
 
     > .#{$namespace}-icon-arrow-right {
       font-size: 20px;
@@ -131,6 +153,10 @@
     }
     .#{$namespace}-time-panel {
       position: absolute;
+      // @fep
+      bottom: 100%;
+      // @fep
+      border-radius: getCssVar('border-radius-large');
     }
   }
   @include when(disabled) {

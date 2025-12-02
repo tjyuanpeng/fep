@@ -17,9 +17,12 @@ $dropdown-item-line-height: map.merge(
 $dropdown-item-padding: () !default;
 $dropdown-item-padding: map.merge(
   (
-    'large': 7px 20px,
-    'default': 5px 16px,
-    'small': 2px 12px,
+    // @fep
+    'large': 9px 12px,
+    // @fep
+    'default': 4px 12px,
+    // @fep
+    'small': 2px 9px,
   ),
   $dropdown-item-padding
 );
@@ -61,7 +64,8 @@ $dropdown-divider-width: 1px !default;
 
     @include picker-popper(
       getCssVar('bg-color', 'overlay'),
-      1px solid getCssVar('border-color-light'),
+      // @fep
+      none,
       getCssVar('dropdown-menu-box-shadow')
     );
 
@@ -144,20 +148,35 @@ $dropdown-menu-padding-vertical: map.merge(
   $dropdown-menu-padding-vertical
 );
 
+// @fep add section
+$dropdown-menu-item-border-radius: () !default;
+$dropdown-menu-item-border-radius: map.merge(
+  (
+    'large': getCssVar('border-radius', 'large'),
+    'default': getCssVar('border-radius', 'large'),
+    'small': getCssVar('border-radius', 'base'),
+  ),
+  $dropdown-menu-item-border-radius
+);
+
 @include b(dropdown-menu) {
   position: relative;
   top: 0;
   left: 0;
   z-index: getCssVar('dropdown-menu-index');
-  padding: map.get($dropdown-menu-padding-vertical, 'default')-$border-width 0;
+  // @fep
+  padding: map.get($dropdown-menu-padding-vertical, 'default');
   margin: 0;
   background-color: getCssVar('bg-color', 'overlay');
   border: none;
-  border-radius: getCssVar('border-radius-base');
+  // @fep
+  border-radius: getCssVar('border-radius-bigger');
   box-shadow: none;
   list-style: none;
 
   @include e(item) {
+    // @fep
+    border-radius: map.get($dropdown-menu-item-border-radius, 'default');
     display: flex;
     align-items: center;
     white-space: nowrap;
@@ -192,12 +211,15 @@ $dropdown-menu-padding-vertical: map.merge(
 
   @each $size in (large, small) {
     @include m($size) {
-      padding: map.get($dropdown-menu-padding-vertical, $size)-$border-width 0;
+      // @fep
+      padding: map.get($dropdown-menu-padding-vertical, $size);
 
       @include e(item) {
         padding: map.get($dropdown-item-padding, $size);
         line-height: map.get($dropdown-item-line-height, $size);
         font-size: map.get($input-font-size, $size);
+        // @fep
+        border-radius: map.get($dropdown-menu-item-border-radius, $size);
 
         @include m(divided) {
           margin: map.get($dropdown-item-divided-margin, $size);
