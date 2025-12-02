@@ -117,7 +117,7 @@ import {
   Delete,
   Document,
   ZoomIn,
-} from '@element-plus/icons-vue'
+} from '@element-plus/components/icon/assets'
 import { useLocale, useNamespace } from '@element-plus/hooks'
 import ElProgress from '@element-plus/components/progress'
 import { useFormDisabled } from '@element-plus/components/form'

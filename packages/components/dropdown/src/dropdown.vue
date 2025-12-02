@@ -107,7 +107,7 @@ import ElRovingFocusGroup from '@element-plus/components/roving-focus-group'
 import { ElOnlyChild } from '@element-plus/components/slot'
 import { useFormSize } from '@element-plus/components/form'
 import { addUnit, ensureArray } from '@element-plus/utils'
-import { ArrowDown } from '@element-plus/icons-vue'
+import { ArrowDown } from '@element-plus/components/icon/assets'
 import { useId, useLocale, useNamespace } from '@element-plus/hooks'
 import { dropdownProps } from './dropdown'
 import {

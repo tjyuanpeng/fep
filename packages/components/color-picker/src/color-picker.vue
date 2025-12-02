@@ -125,7 +125,7 @@ import {
   UPDATE_MODEL_EVENT,
 } from '@element-plus/constants'
 import { debugWarn, getEventCode } from '@element-plus/utils'
-import { ArrowDown, Close } from '@element-plus/icons-vue'
+import { ArrowDown, Close } from '@element-plus/components/icon/assets'
 import { colorPickerEmits, colorPickerProps } from './color-picker'
 import {
   ElColorPickerPanel,

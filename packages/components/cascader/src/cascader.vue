@@ -251,7 +251,7 @@ import {
   EVENT_CODE,
   UPDATE_MODEL_EVENT,
 } from '@element-plus/constants'
-import { ArrowDown, Check } from '@element-plus/icons-vue'
+import { ArrowDown, Check } from '@element-plus/components/icon/assets'
 import { cascaderEmits, cascaderProps } from './cascader'
 
 import type { Options } from '@element-plus/components/popper'

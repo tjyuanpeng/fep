@@ -85,3 +85,9 @@
   // Svg
   @include css-var-from-global('svg-monochrome-grey', 'border-color');
 }
+
+// @fep
+:root {
+  font-family: getCssVar('font-family');
+  color: var(--el-text-color-primary);
+}

@@ -33,9 +33,12 @@
   }
 
   td {
-    width: 32px;
-    height: 30px;
-    padding: 4px 0;
+    // @fep
+    width: 40px;
+    // @fep
+    height: 40px;
+    // @fep
+    padding: 0;
     box-sizing: border-box;
     text-align: center;
     cursor: pointer;
@@ -65,10 +68,11 @@
 
     &.today {
       position: relative;
-      .#{$namespace}-date-table-cell__text {
-        color: getCssVar('color-primary');
-        font-weight: bold;
-      }
+      // @fep remove
+      // @fep
+      border: 1px solid getCssVar('color-primary');
+      // @fep
+      border-radius: getCssVar('border-radius', 'base');
       &.start-date .#{$namespace}-date-table-cell__text,
       &.end-date .#{$namespace}-date-table-cell__text {
         color: $color-white;
@@ -79,14 +83,19 @@
       color: getCssVar('datepicker-hover-text-color');
     }
 
-    &.in-range .#{$namespace}-date-table-cell {
-      background-color: getCssVar('datepicker-inrange-bg-color');
-      &:hover {
-        background-color: getCssVar('datepicker-inrange-hover-bg-color');
-      }
-    }
+    // @fep remove
+    // &.in-range .#{$namespace}-date-table-cell {
+    //   background-color: getCssVar('datepicker-inrange-bg-color');
+    //   &:hover {
+    //     background-color: getCssVar('datepicker-inrange-hover-bg-color');
+    //   }
+    // }
 
     &.current:not(.disabled) {
+      // @fep
+      background-color: getCssVar('datepicker-active-color');
+      // @fep
+      border-radius: getCssVar('border-radius', 'base');
       .#{$namespace}-date-table-cell__text {
         color: $color-white;
         background-color: getCssVar('datepicker-active-color');
@@ -98,6 +107,36 @@
         }
       }
     }
+
+    // @fep
+    &.in-range {
+      // @fep
+      background-color: #1677FF1A;
+    }
+
+    // @fep
+    &.start-date,
+    &.end-date {
+      // @fep
+      background-color: getCssVar('datepicker-active-color');
+    }
+
+    // @fep
+    &.start-date {
+      // @fep
+      border-top-left-radius: getCssVar('border-radius', 'base');
+      // @fep
+      border-bottom-left-radius: getCssVar('border-radius', 'base');
+    }
+
+    // @fep
+    &.end-date {
+      // @fep
+      border-top-right-radius: getCssVar('border-radius', 'base');
+      // @fep
+      border-bottom-right-radius: getCssVar('border-radius', 'base');
+    }
+
     &.start-date .#{$namespace}-date-table-cell,
     &.end-date .#{$namespace}-date-table-cell {
       color: $color-white;

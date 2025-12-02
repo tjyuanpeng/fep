@@ -75,6 +75,16 @@ const getBarStyle = (): CSSProperties => {
     return false
   })
 
+  // @fep section
+  if (sizeName === 'width') {
+    const diff = (tabSize - 24) / 2
+    tabSize = 24
+    offset += diff
+    if (offset < 0) {
+      offset = -24
+    }
+  }
+
   return {
     [sizeName]: `${tabSize}px`,
     transform: `translate${capitalize(sizeDir)}(${offset}px)`,

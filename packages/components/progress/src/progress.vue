@@ -90,7 +90,7 @@ import {
   CircleClose,
   Close,
   WarningFilled,
-} from '@element-plus/icons-vue'
+} from '@element-plus/components/icon/assets'
 import { useNamespace } from '@element-plus/hooks'
 import { isFunction, isString } from '@element-plus/utils'
 import { progressProps } from './progress'
