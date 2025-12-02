@@ -28,7 +28,7 @@
 
     color: getCssVar('bg-color');
     background: getCssVar('popper', 'bg-color-dark');
-    border: 1px solid getCssVar('text-color', 'primary');
+    // @fep remove
 
     > #{$arrow-selector}::before {
       border: 1px solid getCssVar('text-color', 'primary');
@@ -44,7 +44,7 @@
     );
 
     background: getCssVar('popper', 'bg-color-light');
-    border: 1px solid getCssVar('border-color', 'light');
+    // @fep remove
 
     > #{$arrow-selector}::before {
       border: 1px solid getCssVar('border-color', 'light');

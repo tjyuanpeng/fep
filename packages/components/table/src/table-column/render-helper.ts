@@ -144,6 +144,13 @@ function useRender<T extends DefaultRow>(
       }
     }
 
+    // @fep
+    if (slots['filter-panel']) {
+      column.renderFilterPanel = (scope) => {
+        return renderSlot(slots, 'filter-panel', scope)
+      }
+    }
+
     if (slots.expand) {
       column.renderExpand = (scope) => {
         return renderSlot(slots, 'expand', scope)

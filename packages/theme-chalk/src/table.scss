@@ -18,6 +18,8 @@
   background-color: getCssVar('table-bg-color');
   font-size: getCssVar('font-size', 'base');
   color: getCssVar('table-text-color');
+  // @fep
+  border-radius: getCssVar('border-radius', 'large');
 
   @include e(inner-wrapper) {
     position: relative;
@@ -138,7 +140,8 @@
     color: getCssVar('table-header-text-color');
 
     th {
-      font-weight: 600;
+      // @fep
+      font-weight: 400;
     }
 
     &.is-group {
@@ -193,6 +196,16 @@
       white-space: nowrap;
       min-width: 50px;
     }
+
+    // @fep section
+    &.cell-fep-fix {
+      display: flex;
+      align-items: center;
+
+      *:nth-child(1) {
+        margin-left: auto;
+      }
+    }
   }
 
   @each $size in (large, default, small) {
@@ -222,9 +235,7 @@
     border-bottom: getCssVar('table-border');
   }
 
-  th.#{$namespace}-table__cell.is-sortable {
-    cursor: pointer;
-  }
+  // @fep remove
 
   th.#{$namespace}-table__cell {
     background-color: getCssVar('table-header-bg-color');
