@@ -206,6 +206,9 @@ export interface ElMessageBoxOptions {
 
   /** Custom element to append the message box to */
   appendTo?: HTMLElement | string
+
+  // @fep
+  fep?: boolean
 }
 
 export type ElMessageBoxShortcutMethod = ((

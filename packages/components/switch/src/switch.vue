@@ -97,7 +97,7 @@ import {
   useFormItemInputId,
   useFormSize,
 } from '@element-plus/components/form'
-import { Loading } from '@element-plus/icons-vue'
+import { Loading } from '@element-plus/components/icon/assets'
 import {
   CHANGE_EVENT,
   INPUT_EVENT,

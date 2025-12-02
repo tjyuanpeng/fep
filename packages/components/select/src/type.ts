@@ -13,6 +13,7 @@ export interface SelectGroupContext {
   disabled: boolean
 }
 export interface SelectContext {
+  isLazy: boolean
   props: SelectProps
   states: SelectStates
   selectRef: HTMLElement | undefined

@@ -161,8 +161,10 @@ $radio-font-size: map.merge(
     }
 
     &::after {
-      width: 4px;
-      height: 4px;
+      // @fep
+      width: 6px;
+      // @fep
+      height: 6px;
       border-radius: getCssVar('radio-input-border-radius');
       content: '';
       position: absolute;
@@ -214,6 +216,15 @@ $radio-font-size: map.merge(
       @include e(inner) {
         width: map.get($radio-font-size, $size);
         height: map.get($radio-font-size, $size);
+      }
+    }
+  }
+
+  // @fep section
+  &.#{$namespace}-radio--small {
+    @include e(inner) {
+      &::after {
+        transform: translate(-50%, -50%) scale(0.8);
       }
     }
   }

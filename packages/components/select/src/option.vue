@@ -9,6 +9,12 @@
     @mousemove="hoverItem"
     @click.stop="selectOptionClick"
   >
+    <el-checkbox
+      v-if="select.isLazy"
+      v-model="itemSelected"
+      :class="ns.be('dropdown', 'checkbox')"
+      :disabled="isDisabled || undefined"
+    />
     <slot>
       <span>{{ currentLabel }}</span>
     </slot>
@@ -26,6 +32,7 @@ import {
   toRefs,
   unref,
 } from 'vue'
+import ElCheckbox from '@element-plus/components/checkbox'
 import { useId, useNamespace } from '@element-plus/hooks'
 import { useOption } from './useOption'
 import { COMPONENT_NAME, optionProps } from './option'
@@ -39,7 +46,9 @@ import type {
 export default defineComponent({
   name: COMPONENT_NAME,
   componentName: COMPONENT_NAME,
-
+  components: {
+    ElCheckbox,
+  },
   props: optionProps,
 
   setup(props) {

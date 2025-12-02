@@ -101,7 +101,7 @@
 <script lang="ts" setup>
 import { computed, inject, ref, toRef, unref, useSlots, watch } from 'vue'
 import dayjs from 'dayjs'
-import { DArrowLeft, DArrowRight } from '@element-plus/icons-vue'
+import { DArrowLeft, DArrowRight } from '@element-plus/components/icon/assets'
 import ElIcon from '@element-plus/components/icon'
 import { useLocale } from '@element-plus/hooks'
 import { PICKER_BASE_INJECTION_KEY } from '@element-plus/components/time-picker'

@@ -21,20 +21,14 @@
         />
       </div>
       <div :class="ns.be('panel', 'footer')">
-        <button
-          type="button"
-          :class="[ns.be('panel', 'btn'), 'cancel']"
-          @click="handleCancel"
-        >
+        <!-- @fep use el-button -->
+        <el-button size="small" @click="handleCancel">
           {{ t('el.datepicker.cancel') }}
-        </button>
-        <button
-          type="button"
-          :class="[ns.be('panel', 'btn'), 'confirm']"
-          @click="handleConfirm()"
-        >
+        </el-button>
+        <!-- @fep use el-button -->
+        <el-button size="small" type="primary" @click="handleConfirm()">
           {{ t('el.datepicker.confirm') }}
-        </button>
+        </el-button>
       </div>
     </div>
   </transition>
@@ -54,6 +48,8 @@ import {
   useOldValue,
 } from '../composables/use-time-picker'
 import TimeSpinner from './basic-time-spinner.vue'
+// @fep
+import { ElButton } from '@element-plus/components/button'
 
 import type { Dayjs } from 'dayjs'
 
@@ -86,8 +82,9 @@ const oldValue = useOldValue(props, {
 
 // computed
 const transitionName = computed(() => {
+  // @fep
   return isUndefined(props.actualVisible)
-    ? `${ns.namespace.value}-zoom-in-top`
+    ? `${ns.namespace.value}-zoom-in-bottom`
     : ''
 })
 const showSeconds = computed(() => {

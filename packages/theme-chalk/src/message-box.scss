@@ -17,7 +17,8 @@
   padding: getCssVar('messagebox-padding-primary');
   vertical-align: middle;
   background-color: getCssVar('bg-color');
-  border-radius: getCssVar('messagebox-border-radius');
+  // @fep
+  border-radius: getCssVar('border-radius', 'large');
   font-size: getCssVar('messagebox-font-size');
   box-shadow: getCssVar('messagebox-box-shadow');
   text-align: left;
@@ -77,6 +78,8 @@
     font-size: getCssVar('messagebox-font-size');
     line-height: getCssVar('messagebox-font-line-height');
     color: getCssVar('messagebox-title-color');
+    // @fep
+    font-weight: 500;
   }
 
   @include e(headerbtn) {
@@ -166,6 +169,22 @@
     padding-top: getCssVar('messagebox-padding-primary');
   }
 
+  // @fep
+  @include when(fep) {
+    @include e(title) {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 9px;
+    }
+    @include e(status) {
+      font-size: 18px;
+    }
+    @include e(container) {
+      padding-left: 27px;
+    }
+  }
+
   // centerAlign 布局
   @include m(center) {
     @include e(title) {
@@ -185,6 +204,13 @@
 
     @include e(container) {
       justify-content: center;
+    }
+
+    // @fep
+    @include when(fep) {
+      @include e(container) {
+        padding-left: 0;
+      }
     }
   }
 }

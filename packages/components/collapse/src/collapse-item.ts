@@ -1,5 +1,5 @@
 import { buildProps, definePropType, iconPropType } from '@element-plus/utils'
-import { ArrowRight } from '@element-plus/icons-vue'
+import { ArrowRight } from '@element-plus/components/icon/assets'
 
 import type { ExtractPublicPropTypes } from 'vue'
 import type { IconPropType } from '@element-plus/utils'

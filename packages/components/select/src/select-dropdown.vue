@@ -1,6 +1,11 @@
 <template>
   <div
-    :class="[ns.b('dropdown'), ns.is('multiple', isMultiple), popperClass]"
+    :class="[
+      ns.b('dropdown'),
+      ns.is('multiple', isMultiple),
+      ns.is('lazy', isLazy),
+      popperClass,
+    ]"
     :style="{ [isFitInputWidth ? 'width' : 'minWidth']: minWidth }"
   >
     <div v-if="$slots.header" :class="ns.be('dropdown', 'header')">
@@ -31,6 +36,7 @@ export default defineComponent({
 
     // computed
     const popperClass = computed(() => select.props.popperClass)
+    const isLazy = computed(() => select.isLazy)
     const isMultiple = computed(() => select.props.multiple)
     const isFitInputWidth = computed(() => select.props.fitInputWidth)
     const minWidth = ref('')
@@ -55,6 +61,7 @@ export default defineComponent({
       ns,
       minWidth,
       popperClass,
+      isLazy,
       isMultiple,
       isFitInputWidth,
     }

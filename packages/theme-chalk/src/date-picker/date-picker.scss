@@ -27,6 +27,11 @@
     position: relative;
   }
 
+  // @fep section
+  .#{$namespace}-picker-panel__body {
+    display: grid;
+  }
+
   .#{$namespace}-picker-panel__content {
     width: 292px;
   }
@@ -34,22 +39,27 @@
   table {
     table-layout: fixed;
     width: 100%;
+    // @fep
+    border-collapse: separate;
   }
 
   @include e(editor-wrap) {
     position: relative;
     display: table-cell;
-    padding: 0 5px;
+    // @fep remove
   }
 
   @include e(time-header) {
     position: relative;
-    border-bottom: 1px solid getCssVar('datepicker-inner-border-color');
+    // @fep
+    border-top: 1px solid getCssVar('datepicker-inner-border-color');
     font-size: 12px;
-    padding: 8px 5px 5px;
+    // @fep
+    padding: 15px;
     display: table;
     width: 100%;
     box-sizing: border-box;
+    order: 1;
   }
 
   @include e(header) {
@@ -111,6 +121,12 @@
 
   .#{$namespace}-time-panel {
     position: absolute;
+    // @fep
+    bottom: 100%;
+    // @fep
+    left: 40px;
+    // @fep
+    border-radius: getCssVar('border-radius-large');
   }
 
   @include when(disabled) {

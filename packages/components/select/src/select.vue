@@ -58,7 +58,94 @@
             ]"
           >
             <slot
-              v-if="multiple"
+              v-if="multiple && countTags"
+              name="count-tag"
+              :data="states.selected"
+              :delete-tag="deleteTag"
+              :select-disabled="selectDisabled"
+            >
+              <el-tooltip
+                v-if="states.selected.length > 0"
+                ref="tagTooltipRef"
+                :disabled="dropdownMenuVisible"
+                :fallback-placements="
+                  tagTooltip?.fallbackPlacements ?? [
+                    'bottom',
+                    'top',
+                    'right',
+                    'left',
+                  ]
+                "
+                :effect="tagTooltip?.effect ?? effect"
+                :placement="tagTooltip?.placement ?? 'bottom-start'"
+                :popper-class="[
+                  nsSelect.e('count-tag-popper'),
+                  tagTooltip?.popperClass ?? popperClass,
+                ]"
+                :popper-style="tagTooltip?.popperStyle ?? popperStyle"
+                :teleported="tagTooltip?.teleported ?? teleported"
+                :append-to="tagTooltip?.appendTo ?? appendTo"
+                :popper-options="tagTooltip?.popperOptions ?? popperOptions"
+                :transition="tagTooltip?.transition"
+                :show-after="tagTooltip?.showAfter"
+                :hide-after="tagTooltip?.hideAfter"
+                :auto-close="tagTooltip?.autoClose"
+                :offset="tagTooltip?.offset"
+                :show-arrow="false"
+              >
+                <template #default>
+                  <div
+                    ref="collapseItemRef"
+                    :class="nsSelect.e('selected-item')"
+                  >
+                    <el-tag
+                      :closable="false"
+                      :size="collapseTagSize"
+                      :type="tagType"
+                      :effect="tagEffect"
+                      disable-transitions
+                      :style="collapseTagStyle"
+                    >
+                      <span :class="nsSelect.e('tags-text')">
+                        已选择 {{ states.selected.length }} 项
+                      </span>
+                    </el-tag>
+                  </div>
+                </template>
+                <template #content>
+                  <div ref="tagMenuRef" :class="nsSelect.e('selection')">
+                    <div
+                      v-for="item in states.selected"
+                      :key="getValueKey(item)"
+                      :class="nsSelect.e('selected-item')"
+                    >
+                      <el-tag
+                        class="in-tooltip"
+                        :closable="!selectDisabled && !item.isDisabled"
+                        :size="collapseTagSize"
+                        :type="tagType"
+                        :effect="tagEffect"
+                        disable-transitions
+                        @close="deleteTag($event, item)"
+                      >
+                        <span :class="nsSelect.e('tags-text')">
+                          <slot
+                            name="label"
+                            :index="item.index"
+                            :label="item.currentLabel"
+                            :value="item.value"
+                          >
+                            {{ item.currentLabel }}
+                          </slot>
+                        </span>
+                      </el-tag>
+                    </div>
+                  </div>
+                </template>
+              </el-tooltip>
+            </slot>
+            <slot
+              v-else-if="multiple"
               name="tag"
               :data="states.selected"
               :delete-tag="deleteTag"
@@ -310,7 +397,11 @@
                       v-bind="getOptionProps(item)"
                     />
                   </el-option-group>
-                  <el-option v-else v-bind="getOptionProps(option)" />
+                  <el-option v-else v-bind="getOptionProps(option)">
+                    <template #default>
+                      <slot name="option-label" v-bind="{ option, index }" />
+                    </template>
+                  </el-option>
                 </template>
               </slot>
             </el-options>
@@ -330,11 +421,17 @@
             </slot>
           </div>
           <div
-            v-if="$slots.footer"
-            :class="nsSelect.be('dropdown', 'footer')"
+            v-if="$slots.footer || isLazy"
+            :class="[
+              nsSelect.be('dropdown', 'footer'),
+              nsSelect.is('lazy', isLazy),
+            ]"
             @click.stop
           >
-            <slot name="footer" />
+            <slot name="footer">
+              <el-button @click="clearLazy">清空</el-button>
+              <el-button type="primary" @click="confirmLazy">确定</el-button>
+            </slot>
           </div>
         </el-select-menu>
       </template>
@@ -369,6 +466,8 @@ import { selectKey } from './token'
 import ElOptions from './options'
 import { selectProps } from './select'
 import ElOptionGroup from './option-group.vue'
+import ElButton from '@element-plus/components/button'
+import { useLazy } from './use-lazy'
 
 import type { AppConfig, AppContext, VNode } from 'vue'
 import type { SelectContext } from './type'
@@ -432,6 +531,7 @@ export default defineComponent({
     ElScrollbar,
     ElTooltip,
     ElIcon,
+    ElButton,
   },
   directives: { ClickOutside },
   props: selectProps,
@@ -463,12 +563,19 @@ export default defineComponent({
       return multiple ? fallback : rawModelValue
     })
 
+    const { LazyModelValue, lazyEmit, setAPI, lazyProps } = useLazy(
+      props,
+      emit,
+      modelValue
+    )
     const _props = reactive({
       ...toRefs(props),
-      modelValue,
+      modelValue: LazyModelValue,
     })
 
-    const API = useSelect(_props, emit)
+    const API = useSelect(_props, lazyEmit)
+    setAPI(API)
+
     const { calculatorRef, inputStyle } = useCalcInputWidth()
     const { getLabel, getValue, getOptions, getDisabled } = useProps(props)
 
@@ -552,6 +659,7 @@ export default defineComponent({
         props: _props,
         states: API.states,
         selectRef: API.selectRef,
+        isLazy: lazyProps.isLazy,
         optionsArray: API.optionsArray,
         setSelected: API.setSelected,
         handleOptionSelect: API.handleOptionSelect,
@@ -580,6 +688,7 @@ export default defineComponent({
 
     return {
       ...API,
+      ...lazyProps,
       modelValue,
       selectedLabel,
       calculatorRef,

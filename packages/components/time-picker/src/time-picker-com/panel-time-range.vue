@@ -48,21 +48,19 @@
       </div>
     </div>
     <div :class="nsTime.be('panel', 'footer')">
-      <button
-        type="button"
-        :class="[nsTime.be('panel', 'btn'), 'cancel']"
-        @click="handleCancel()"
-      >
+      <!-- @fep use el-button -->
+      <el-button size="small" @click="handleCancel()">
         {{ t('el.datepicker.cancel') }}
-      </button>
-      <button
-        type="button"
-        :class="[nsTime.be('panel', 'btn'), 'confirm']"
+      </el-button>
+      <!-- @fep use el-button -->
+      <el-button
+        size="small"
+        type="primary"
         :disabled="btnConfirmDisabled"
         @click="handleConfirm()"
       >
         {{ t('el.datepicker.confirm') }}
-      </button>
+      </el-button>
     </div>
   </div>
 </template>
@@ -82,6 +80,8 @@ import {
   useOldValue,
 } from '../composables/use-time-picker'
 import TimeSpinner from './basic-time-spinner.vue'
+// @fep
+import { ElButton } from '@element-plus/components/button'
 
 import type { Dayjs } from 'dayjs'
 
