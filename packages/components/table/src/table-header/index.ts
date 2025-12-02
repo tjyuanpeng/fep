@@ -259,9 +259,9 @@ export default defineComponent({
                   {
                     class: [
                       'cell',
-                      column.filteredValue && column.filteredValue.length > 0
-                        ? 'highlight'
-                        : '',
+                      // @fep
+                      'cell-fep-fix',
+                      // @fep remove
                     ],
                   },
                   [
@@ -316,6 +316,10 @@ export default defineComponent({
                               ? column.renderFilterIcon({
                                   filterOpened: column.filterOpened,
                                 })
+                              : null,
+                          'filter-panel': (scope: any) =>
+                            column.renderFilterPanel
+                              ? column.renderFilterPanel(scope)
                               : null,
                         }
                       ),

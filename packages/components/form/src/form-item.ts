@@ -1,5 +1,12 @@
 import { componentSizes } from '@element-plus/constants'
-import { buildProps, definePropType } from '@element-plus/utils'
+// @fep
+import {
+  buildProps,
+  definePropType,
+  isArray,
+  isBoolean,
+  isString,
+} from '@element-plus/utils'
 
 import type { ExtractPublicPropTypes } from 'vue'
 import type { ComponentSize } from '@element-plus/constants'
@@ -65,6 +72,8 @@ export interface FormItemProps {
    * @description Control the size of components in this form-item.
    */
   size?: ComponentSize
+  // @fep
+  fieldValue?: any | (() => any)
 }
 
 /**
@@ -144,9 +153,22 @@ export const formItemProps = buildProps({
     type: String,
     values: componentSizes,
   },
+  // @fep
+  fieldValue: {
+    type: definePropType<() => any | any>([Object, Function]),
+  },
 } as const)
 
 /**
  * @deprecated Removed after 3.0.0, Use `FormItemProps` instead.
  */
 export type FormItemPropsPublic = ExtractPublicPropTypes<typeof formItemProps>
+
+// @fep section
+export const formItemEmits = {
+  validate: (prop: FormItemProp, isValid: boolean, message: string) =>
+    (isArray(prop) || isString(prop)) &&
+    isBoolean(isValid) &&
+    isString(message),
+}
+export type FormItemEmits = typeof formItemEmits

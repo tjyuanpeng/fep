@@ -23,6 +23,7 @@
           :focus-start-el="focusStartRef"
           @release-requested="onCloseRequested"
         >
+          <!-- @fep -->
           <div
             ref="rootRef"
             :class="[
@@ -30,6 +31,7 @@
               customClass,
               ns.is('draggable', draggable),
               ns.is('dragging', isDragging),
+              ns.is('fep', isFep),
               { [ns.m('center')]: center },
             ]"
             :style="customStyle"
@@ -42,8 +44,9 @@
               :class="[ns.e('header'), { 'show-close': showClose }]"
             >
               <div :class="ns.e('title')">
+                <!-- @fep -->
                 <el-icon
-                  v-if="iconComponent && center"
+                  v-if="isFep || (iconComponent && center)"
                   :class="[ns.e('status'), typeClass]"
                 >
                   <component :is="iconComponent" />
@@ -69,8 +72,9 @@
             </div>
             <div :id="contentId" :class="ns.e('content')">
               <div :class="ns.e('container')">
+                <!-- @fep -->
                 <el-icon
-                  v-if="iconComponent && !center && hasMessage"
+                  v-if="!isFep && iconComponent && !center && hasMessage"
                   :class="[ns.e('status'), typeClass]"
                 >
                   <component :is="iconComponent" />
@@ -183,7 +187,7 @@ import {
   isValidComponentSize,
 } from '@element-plus/utils'
 import { ElIcon } from '@element-plus/components/icon'
-import { Loading } from '@element-plus/icons-vue'
+import { Loading } from '@element-plus/components/icon/assets'
 import ElFocusTrap from '@element-plus/components/focus-trap'
 import { useGlobalComponentSettings } from '@element-plus/components/config-provider'
 
@@ -214,6 +218,8 @@ export default defineComponent({
     buttonSize: {
       type: String as PropType<ComponentSize>,
       validator: isValidComponentSize,
+      // @fep
+      default: 'large',
     },
     modal: {
       type: Boolean,
@@ -240,6 +246,11 @@ export default defineComponent({
       default: true,
     },
     center: Boolean,
+    // @fep
+    fep: {
+      type: Boolean,
+      default: true,
+    },
     draggable: Boolean,
     overflow: Boolean,
     roundButton: Boolean,
@@ -327,6 +338,10 @@ export default defineComponent({
       const type = state.type
       return state.icon || (type && TypeComponentsMap[type]) || ''
     })
+    // @fep
+    const isFep = computed(
+      () => props.fep && !!state.title && !!iconComponent.value
+    )
     const hasMessage = computed(() => !!state.message)
     const rootRef = ref<HTMLElement>()
     const headerRef = ref<HTMLElement>()
@@ -499,6 +514,8 @@ export default defineComponent({
       inputId,
       btnSize,
       iconComponent,
+      // @fep
+      isFep,
       confirmButtonClasses,
       rootRef,
       focusStartRef,

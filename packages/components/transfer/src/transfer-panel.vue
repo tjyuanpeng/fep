@@ -63,7 +63,7 @@ import { isEmpty, mutable } from '@element-plus/utils'
 import { useLocale, useNamespace } from '@element-plus/hooks'
 import { ElCheckbox, ElCheckboxGroup } from '@element-plus/components/checkbox'
 import { ElInput } from '@element-plus/components/input'
-import { Search } from '@element-plus/icons-vue'
+import { Search } from '@element-plus/components/icon/assets'
 import { transferPanelEmits } from './transfer-panel'
 import { useCheck, usePropsAlias } from './composables'
 
