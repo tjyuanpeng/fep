@@ -1,5 +1,12 @@
 import { componentSizes } from '@element-plus/constants'
-import { buildProps, definePropType } from '@element-plus/utils'
+// @fep
+import {
+  buildProps,
+  definePropType,
+  isArray,
+  isBoolean,
+  isString,
+} from '@element-plus/utils'
 
 import type { ExtractPropTypes, ExtractPublicPropTypes } from 'vue'
 import type { Arrayable } from '@element-plus/utils'
@@ -33,6 +40,10 @@ export const formItemProps = buildProps({
     type: String,
     values: ['left', 'right', 'top', ''],
     default: '',
+  },
+  // @fep
+  fieldValue: {
+    type: definePropType<() => any | any>([Object, Function]),
   },
   /**
    * @description  A key of `model`. It could be an array of property paths (e.g `['a', 'b', '0']`). In the use of `validate` and `resetFields` method, the attribute is required.
@@ -92,3 +103,12 @@ export const formItemProps = buildProps({
 } as const)
 export type FormItemProps = ExtractPropTypes<typeof formItemProps>
 export type FormItemPropsPublic = ExtractPublicPropTypes<typeof formItemProps>
+
+// @fep section
+export const formItemEmits = {
+  validate: (prop: FormItemProp, isValid: boolean, message: string) =>
+    (isArray(prop) || isString(prop)) &&
+    isBoolean(isValid) &&
+    isString(message),
+}
+export type FormItemEmits = typeof formItemEmits

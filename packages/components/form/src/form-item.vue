@@ -63,7 +63,7 @@ import {
 } from '@element-plus/utils'
 import { useId, useNamespace } from '@element-plus/hooks'
 import { useFormSize } from './hooks'
-import { formItemProps } from './form-item'
+import { formItemEmits, formItemProps } from './form-item'
 import FormLabelWrap from './form-label-wrap'
 import { formContextKey, formItemContextKey } from './constants'
 
@@ -76,6 +76,9 @@ import type {
   FormValidateFailure,
 } from './types'
 import type { FormItemValidateState } from './form-item'
+
+// @fep
+const emit = defineEmits(formItemEmits)
 
 defineOptions({
   name: 'ElFormItem',
@@ -177,6 +180,12 @@ const isGroup = computed<boolean>(() => {
 const isNested = !!parentFormItemContext
 
 const fieldValue = computed(() => {
+  // @fep section
+  if (props.fieldValue !== undefined) {
+    return typeof props.fieldValue === 'function'
+      ? props.fieldValue()
+      : props.fieldValue
+  }
   const model = formContext?.model
   if (!model || !props.prop) {
     return
@@ -272,11 +281,15 @@ const onValidationFailed = (error: FormValidateFailure) => {
     ? (errors?.[0]?.message ?? `${props.prop} is required`)
     : ''
 
+  // @fep
+  emit('validate', props.prop!, false, validateMessage.value)
   formContext?.emit('validate', props.prop!, false, validateMessage.value)
 }
 
 const onValidationSucceeded = () => {
   setValidationState('success')
+  // @fep
+  emit('validate', props.prop!, true, '')
   formContext?.emit('validate', props.prop!, true, '')
 }
 
@@ -299,7 +312,8 @@ const doValidate = async (rules: RuleItem[]): Promise<true> => {
 
 const validate: FormItemContext['validate'] = async (trigger, callback) => {
   // skip validation if its resetting
-  if (isResettingField || !props.prop) {
+  // @fep
+  if (isResettingField || (!props.prop && props.fieldValue === undefined)) {
     return false
   }
 

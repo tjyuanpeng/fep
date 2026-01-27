@@ -83,6 +83,8 @@
   height: 40px;
   // @fep
   border-radius: getCssVar('border-radius-large');
+  // @fep
+  margin: 3px 0;
   line-height: 34px;
   outline: none;
 
@@ -104,7 +106,7 @@
 
   // @fep
   &.is-active {
-    background-color: #1677FF0D;
+    background-color: #1677ff0d;
   }
 
   &:not(.is-disabled) {
@@ -112,6 +114,8 @@
 
     &:hover,
     &:focus {
+      // @fep
+      font-weight: bold;
       background: getCssVar('cascader-node', 'background-hover');
     }
   }
@@ -123,7 +127,8 @@
 
   @include e(prefix) {
     position: absolute;
-    left: 10px;
+    // @fep
+    left: 4px;
   }
 
   @include e(postfix) {

@@ -11,6 +11,8 @@ import {
 import useExpand from './expand'
 import useCurrent from './current'
 import useTree from './tree'
+// @fep
+import useEdit from './edit'
 
 import type { Ref } from 'vue'
 import type { TableColumnCtx } from '../table-column/defaults'
@@ -507,6 +509,10 @@ function useWatcher<T extends DefaultRow>() {
     data,
     rowKey,
   })
+
+  // @fep
+  const { states: editStates, ...editMethods } = useEdit()
+
   // 适配层，expand-row-keys 在 Expand 与 TreeTable 中都有使用
   const setExpandRowKeysAdapter = (val: string[]) => {
     // 这里会触发额外的计算，但为了兼容性，暂时这么做
@@ -525,6 +531,8 @@ function useWatcher<T extends DefaultRow>() {
   }
 
   return {
+    // @fep
+    ...editMethods,
     assertRowKey,
     updateColumns,
     scheduleLayout,
@@ -583,6 +591,8 @@ function useWatcher<T extends DefaultRow>() {
       sortProp,
       sortOrder,
       hoverRow,
+      // @fep
+      ...editStates,
       ...expandStates,
       ...treeStates,
       ...currentData,

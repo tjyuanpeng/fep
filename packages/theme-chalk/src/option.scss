@@ -32,6 +32,8 @@ $checked-icon: "data:image/svg+xml;utf8,%3Csvg class='icon' width='200' height='
     padding: 0 #{14 + 12}px 0 14px;
     // @fep
     border-radius: getCssVar('border-radius-large');
+    // @fep
+    margin: 3px 0;
     position: relative;
     white-space: nowrap;
     overflow: hidden;
@@ -52,7 +54,7 @@ $checked-icon: "data:image/svg+xml;utf8,%3Csvg class='icon' width='200' height='
       color: map.get($select-option, 'selected-text-color');
       font-weight: bold;
       // @fep
-      background-color: #1677FF0D;
+      background-color: #1677ff0d;
     }
 
     @include when(disabled) {
