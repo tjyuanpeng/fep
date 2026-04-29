@@ -1,0 +1,5 @@
+import fs from 'node:fs'
+const pkg = JSON.parse(fs.readFileSync('./packages/element-plus/package.json', 'utf8'))
+pkg.name = '@falconix/fep'
+pkg.description = 'falconix element plus'
+fs.writeFileSync('./packages/element-plus/package.json', JSON.stringify(pkg, null, '  '))
